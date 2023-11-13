@@ -1,3 +1,3 @@
-Welcome to my blog |
---- |
-Where you will find quality content |
+title: Welcome to my blog
+
+This is where you will find quality content.
