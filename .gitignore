@@ -17,5 +17,8 @@ package-lock.json
 # IDE configurations
 .idea
 
+# Nix
+.direnv
+
 # Misc
 assets/js/dist
