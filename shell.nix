@@ -1,14 +1,22 @@
-with (import <nixpkgs> { });
+{
+  pkgs ? import <nixpkgs> { },
+  ...
+}:
 let
-  env = bundlerEnv {
+  env = pkgs.bundlerEnv {
     name = "eljamm.github.io-bundler-env";
-    inherit ruby;
+    inherit (pkgs) ruby;
     gemfile = ./Gemfile;
     lockfile = ./Gemfile.lock;
     gemset = ./gemset.nix;
   };
+  watch-blog = pkgs.writeShellScriptBin "watch-blog" ''
+    exec ${env}/bin/jekyll serve --watch
+  '';
 in
-stdenv.mkDerivation {
-  name = "eljamm.github.io";
-  buildInputs = [ env bundix ];
+pkgs.mkShellNoCC {
+  packages = [
+    env
+    watch-blog
+  ];
 }
