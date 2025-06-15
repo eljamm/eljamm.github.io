@@ -36,6 +36,10 @@ let
 
   formatter = import ./dev/formatter.nix args;
 
+  # To update `./gemset.nix`, run:
+  # - `bundle lock --update`
+  # - `bundix -l`
+  # - reload nix-shell
   env = pkgs.bundlerEnv {
     name = "eljamm.github.io-bundler-env";
     inherit (pkgs) ruby;
