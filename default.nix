@@ -64,6 +64,7 @@ let
         env
         formatter
         watch-blog
+        pkgs.zola
       ];
     };
 
