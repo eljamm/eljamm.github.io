@@ -49,7 +49,11 @@ let
   };
 
   watch-blog = pkgs.writeShellScriptBin "watch-blog" ''
-    exec ${env}/bin/jekyll serve --watch
+    exec ${env}/bin/jekyll \
+      serve \
+      --watch \
+      --livereload \
+      --incremental
   '';
 
   default = rec {
