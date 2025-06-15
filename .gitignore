@@ -28,3 +28,5 @@ assets/js/dist
 
 # Nix
 .direnv
+.pre-commit-config.yaml
+result*
