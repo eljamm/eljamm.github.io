@@ -16,41 +16,57 @@ tags = [
 ]
 +++
 
-In this post, we will go through the necessary steps to visualize flamegraphs inside NeoVim.
+A cool feature that's been recently introduced to the Nix evaluator is a [stack-sampling profiler](https://github.com/NixOS/nix/pull/13220), which can help identify and [optimize evaluation bottlenecks](https://github.com/NixOS/nixpkgs/pull/410782) by analyzing the flamegraphs it generates.
 
-{{ img(src="/images/nix-profiler.svg" alt="Nix profiler" link="<https://github.com/ngi-nix/ngipkgs/blob/4810584e62513da39b5cdee18ffb4aef4865a982/overview/default.nix#L238>") }}
+In this post, we'll go through the necessary steps to visualize this flamegraph inside NeoVim, for a more seamless experience.
+
+{{ img(src="/images/nix-profiler.svg" alt="Nix profiler" caption="Example of a visualized flamegraph" link="<https://github.com/ngi-nix/ngipkgs/blob/4810584e62513da39b5cdee18ffb4aef4865a982/overview/default.nix#L238>") }}
 
 # Nix profiler
 
 ## Generating a flamegraph
 
-Although this feature has been merged in [NixOS/nix · #13220](https://github.com/NixOS/nix/pull/13220), it has yet to reach a stable Nix release and might take a while before that happens. This means that we'll need to use a pinned Nix version that does support it:
+This feature requires a Nix version of 2.30, at least.
+If you don't have that or a newer version installed, you can use:
 
 ```fish
-nix run github:NixOS/nix/4cc312a6e1911220b3c913c3d5f40f8dbf448a4a -- eval \
+nix run github:NixOS/nix/v2.30.1 -- --version
+```
+
+On my system, this takes about 2 minutes to build, but this may differ depending on your system resources.
+
+Once that's done, pick something you want to analyze (derivation, NixOS system, ...) and evaluate it with the profiler.
+For this post, I'm gonna use the [NGIpkgs overview](https://github.com/ngi-nix/ngipkgs/) as an example since it's something I've been recently interacted with:
+
+```fish
+nix run github:NixOS/nix/v2.30.1 -- eval \
     --no-eval-cache \
     --file ./default.nix overview \
     --option eval-profiler flamegraph
 ```
 
-The flamegraph will be saved under `nix.profile`, by default.
+As a result, the flamegraph will be saved under `nix.profile` by default and we can proceed to analyzing its data.
 
-> [!NOTE]
-> Nix might take some time to build, depending on your system resources, so go get yourself something to drink in the meantime ☕
+## Visualization tools
 
-## Visualization
+There exist many tools that can visualize flamegraph files, but the most I like are:
 
-The result file is like any flamegraph and can be visualized with normal tools like:
-
-1. [speedscope](https://github.com/jlfwong/speedscope/issues)
+1. [speedscope](https://github.com/jlfwong/speedscope)
 1. [flamelens](https://github.com/YS-L/flamelens)
 1. [flamegraph](https://github.com/brendangregg/FlameGraph)
 
 Which are all available in Nixpkgs :)
 
+Reading these graphs is simple.
+
+{{ img(src="/images/flamelens.svg" alt="flamelens output" caption="flamelens nix.profile") }}
+
 # NeoVim plugin
 
-The plugin in question is [t-troebst/perfanno.nvim](https://github.com/t-troebst/perfanno.nvim), a lua plugin that annotates source code with profiling information. What really caught my attention was the fact that it's language-agnostic, so I naturally wanted to try it with the Nix profiler.
+All the tools listed above are great, but re-opening the files becomes tedious pretty fast.
+
+The plugin in question is [t-troebst/perfanno.nvim](https://github.com/t-troebst/perfanno.nvim), a lua plugin that annotates source code with profiling information.
+What really caught my attention was the fact that it's language-agnostic, so I naturally wanted to try it with the Nix profiler.
 
 ## Installation
 
@@ -88,10 +104,11 @@ return {
 The plugin expects the file to be under `perf.log`, by default, but will ask you for the file path if it can't find it.
 
 ```fish
-nix run github:NixOS/nix/4cc312a6e1911220b3c913c3d5f40f8dbf448a4a -- eval \
+nix run github:NixOS/nix/v2.30.1 -- eval \
     --no-eval-cache \
     --file ./default.nix overview \
-    --option eval-profiler flamegraph
+    --option eval-profiler flamegraph \
+    --option eval-profile-file perf.log
 ```
 
 Watchexec
