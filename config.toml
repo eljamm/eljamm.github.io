@@ -108,7 +108,7 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Website content is licens
 ###############################################################################
 
 title_separator = "|"                                                                                 # Separator between title and title_addition, set as |, -, _, etc
-title_addition = "Fast, Lightweight, and Modern Zola Theme"                                           # a default value for title addition (for SEO aim for 50-70 characters including the title and separator 'Abridge | title_addition')
+title_addition = "Technology, Programming, Music"                                                     # a default value for title addition (for SEO aim for 50-70 characters including the title and separator 'Abridge | title_addition')
 author = "eljamm"                                                                                     # Put Your Name here
 keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
 banner = "banner.png"                                                                                 # Used as default image for OpenGraph/Twitter if page specific image is undefined.
@@ -126,10 +126,10 @@ seo = true                                                                      
 ###   https://github.com/Jieiku/abridge/blob/master/templates/macros/social.html
 ###############################################################################
 
-feed = true               # this adds the RSS feed icon in the footer.
-mail = "name@example.com"
+feed = true                          # this adds the RSS feed icon in the footer.
+mail = "fedi.jamoussi@protonmail.ch"
 #mastodon = "https://mastodon.example.com/@username"
-element = "matrix.example.com"
+#element = "matrix.example.com"
 #buymeacoffee = "your-user-name"
 #kofi = "your-user-name"
 #discord = "https://discord.com/invite/my-server" # https://discord.com/invite/my-server  *or*  https://discord.com/servers/my-server-id
@@ -148,7 +148,7 @@ github = "eljamm"
 #pixelfed = "https://pixelfed.example.com/" # Heaviest icon, off by default
 #pinterest = "your-user-name"
 #twitch = "your-user-name"
-#youtube = "channel/your-channel-id"
+youtube = "@PhanLounge"
 #peertube = "https://peertube.example.com/@username"
 #researchgate = "your-profile-id"
 #telegram = "your-user-name"
@@ -178,7 +178,7 @@ js_bundle = true # multiple javascript files combined into a single file (settin
 js_copycode = true           # The copy button on code blocks that allows you to copy them to the clipboard.
 js_email_encode = true       # obfuscates email address in footer
 js_prestyle = true           # used to preload: FontAwesome, Katex, external Google Fonts
-js_switcher = false           # The button that allows manually changing between light/dark mode.
+js_switcher = false          # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
 search_library = "elasticlunr"
@@ -288,7 +288,7 @@ favicon16 = "favicon-16x16.png"        # favicon-16x16.png
 
 #security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
+security_header_csp = "default-src 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
 
 
 ###############################################################################

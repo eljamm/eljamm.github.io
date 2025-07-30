@@ -1,7 +1,7 @@
 +++
 date = 2025-06-15T22:05:00Z
 description = "Instructions for setting up NeoVim to visualize the Nix evaluator's stack profile in the code."
-draft = false
+draft = true
 title = "Visualize Nix flamegraphs with NeoVim"
 
 [extra]

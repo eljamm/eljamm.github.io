@@ -36,24 +36,11 @@ let
 
   formatter = import ./dev/formatter.nix args;
 
-  # To update `./gemset.nix`, run:
-  # - `bundle lock --update`
-  # - `bundix -l`
-  # - reload nix-shell
-  env = pkgs.bundlerEnv {
-    name = "eljamm.github.io-bundler-env";
-    inherit (pkgs) ruby;
-    gemfile = ./Gemfile;
-    lockfile = ./Gemfile.lock;
-    gemset = ./gemset.nix;
-  };
-
   watch-blog = pkgs.writeShellScriptBin "watch-blog" ''
-    exec ${env}/bin/jekyll \
+    exec ${lib.getExe pkgs.zola} \
       serve \
-      --watch \
-      --livereload \
-      --incremental
+      --open \
+      --fast
   '';
 
   default = rec {
@@ -61,7 +48,6 @@ let
 
     shells.default = pkgs.mkShellNoCC {
       packages = [
-        env
         formatter
         watch-blog
         pkgs.zola
