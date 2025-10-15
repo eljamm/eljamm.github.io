@@ -37,12 +37,13 @@ include_content = true            # include rendered content of page/section in 
 [markdown]
 highlight_code = true
 highlight_theme = "css"
-bottom_footnotes = true            # adds footnote backreference
+bottom_footnotes = true                  # adds footnote backreference
 render_emoji = false
-external_links_target_blank = true # rel="noopener"
-external_links_no_follow = false   # rel="nofollow"
-external_links_no_referrer = false # rel="noreferrer"
-smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
+external_links_target_blank = true       # rel="noopener"
+external_links_no_follow = false         # rel="nofollow"
+external_links_no_referrer = false       # rel="noreferrer"
+smart_punctuation = false                # `...` to `…`, `"quote"` to `“curly”` etc
+extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
 ###############################################################################

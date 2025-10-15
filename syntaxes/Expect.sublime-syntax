@@ -1,0 +1,22 @@
+%YAML 1.2
+---
+name: Expect
+file_extensions: [exp]
+scope: source.expect
+
+contexts:
+  main:
+    - match: \b(set|spawn|expect|exp_continue|send|exec|while|gets|open|close)\b
+      scope: keyword.control.expect
+    - match: '"'
+      push: string
+    - match: '\#.*'
+      scope: comment.line
+    - match: '\b\d+(\.\d+)?\b'
+      scope: constant.numeric
+  string:
+    - meta_scope: string.quoted.double.c
+    - match: \\.
+      scope: constant.character.escape.c
+    - match: '"'
+      pop: true
