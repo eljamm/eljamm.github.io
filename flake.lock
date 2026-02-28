@@ -18,22 +18,6 @@
         "type": "github"
       }
     },
-    "git-hooks": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1717587264,
-        "narHash": "sha256-sNM1ENRcMkhr3QUCb+izRMkswzvVKF3K69fsJ5sexfk=",
-        "owner": "fricklerhandwerk",
-        "repo": "git-hooks",
-        "rev": "f925267ca7c5ac711b881e125227c8f3b414ca94",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fricklerhandwerk",
-        "repo": "git-hooks",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1749794982,
@@ -53,7 +37,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "git-hooks": "git-hooks",
         "nixpkgs": "nixpkgs",
         "treefmt-nix": "treefmt-nix"
       }

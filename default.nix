@@ -1,15 +1,9 @@
-let
-  flake-inputs = import (
-    fetchTarball "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0"
-  );
-  inherit (flake-inputs)
-    import-flake
-    ;
-in
 {
-  self ? import-flake {
-    src = ./.;
-  },
+  flake-inputs ? import (fetchTarball {
+    url = "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0";
+    sha256 = "1j57avx2mqjnhrsgq3xl7ih8v7bdhz1kj3min6364f486ys048bm";
+  }),
+  self ? flake-inputs.import-flake { src = ./.; },
   inputs ? self.inputs,
   system ? builtins.currentSystem,
   pkgs ? import inputs.nixpkgs {
@@ -20,43 +14,40 @@ in
   lib ? import "${inputs.nixpkgs}/lib",
 }:
 let
-  args = {
+  call = default.callPackage;
+
+  default = lib.makeScope pkgs.newScope (def: {
     inherit
       lib
       pkgs
       self
       system
       inputs
+      flake
+      default # recurse scope
       ;
-    inherit (default)
-      packages
-      ;
-    devShells = default.shells;
-  };
 
-  formatter = import ./dev/formatter.nix args;
+    formatter = call ./nix/formatter.nix { };
 
-  watch-blog = pkgs.writeShellScriptBin "watch-blog" ''
-    exec ${lib.getExe pkgs.zola} \
-      serve \
-      --open \
-      --fast
-  '';
-
-  default = rec {
-    packages = { };
+    watch-blog = pkgs.writeShellScriptBin "watch-blog" ''
+      exec ${lib.getExe pkgs.zola} \
+        serve \
+        --open \
+        --fast
+    '';
 
     shells.default = pkgs.mkShellNoCC {
-      packages = [
-        formatter
-        watch-blog
-        pkgs.zola
+      packages = with pkgs; [
+        def.formatter.package
+        def.watch-blog
+        zola
       ];
     };
+  });
 
-    flake.packages = lib.filterAttrs (n: v: lib.isDerivation v) packages;
-    flake.devShells = shells;
-    flake.formatter = formatter;
+  flake.perSystem = {
+    devShells = default.shells;
+    formatter = default.formatter.package;
   };
 in
-default // args
+default
