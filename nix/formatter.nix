@@ -19,6 +19,10 @@ lib.makeExtensible (self: {
       includes = [ "*" ];
       priority = 9; # last
     };
+
+    settings.global.excludes = [
+      "themes/*"
+    ];
   };
 
   # evaluated config

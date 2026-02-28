@@ -76,7 +76,7 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 The `image` shortcode returns a `<picture>` tag with multiple sources.
 
 Each string in the `sources` array should be a path to an image file of a different type (`avif`, `webp`, `png`, `jpg`, etc).
- The last image in the `sources` array is used to create an `<img>` tag for the browser to fall back on if the other formats are not yet supported.
+The last image in the `sources` array is used to create an `<img>` tag for the browser to fall back on if the other formats are not yet supported.
 
 - `sources` is an array of image file paths. (mandatory)
 - `class` sets a class for the image.
@@ -110,7 +110,7 @@ Each string in the `sources` array should be a path to an image file of a differ
 ## GIF
 
 The `gif` shortcode is exactly the same as the [video shortcode](#video).
- The only difference is it automatically has the additional properties: `autoplay`, `loop`, `muted`, `playsinline`.
+The only difference is it automatically has the additional properties: `autoplay`, `loop`, `muted`, `playsinline`.
 
 Using the `<video>` tag in place of gifs allows for reduced file sizes,
 which is especially important in regions where internet is slower or
