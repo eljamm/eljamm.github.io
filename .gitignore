@@ -12,3 +12,9 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+## Nix ##
+.direnv*
+.pre-commit-config.yaml
+result*
+treefmt.toml
