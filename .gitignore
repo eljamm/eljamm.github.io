@@ -1,14 +1,35 @@
-.DS_Store
 .gitignore
 node_modules
 public
 prof
 tsconfig.tsbuildinfo
-.obsidian
 .quartz-cache
 private/
 .replit
 replit.nix
+
+## Obsidian ##
+.obsidian
+
+# Might be useful to prevent some plugin from exposing sensitive data.
+# .obsidian/plugins
+
+# Obsidian plugins data
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/plugins/*/manifest.json
+
+# Keep plugin configurations
+#!.obsidian/plugins/*/config.json
+#!.obsidian/plugins/*/data.json
+
+# Workspaces
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+## OS settings and caches ##
+.trash/
+.DS_Store
 
 ## Nix ##
 .direnv*
