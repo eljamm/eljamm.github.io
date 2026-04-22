@@ -30,21 +30,28 @@ function escapeHtml(text: string): string {
     .replace(/"/g, "&quot;")
 }
 
+function cleanAttributeValue(value: string | undefined): string {
+  if (!value) return ""
+  return value.replace(/^<|>$/g, "")
+}
+
 function buildFigureHtml(attrs: Record<string, string>): string {
   const { src, alt = "", caption, width, height, link } = attrs
+  const cleanSrc = cleanAttributeValue(src)
+  const cleanLink = link ? cleanAttributeValue(link) : undefined
 
-  if (!src) {
+  if (!cleanSrc) {
     return ""
   }
 
-  let imgTag = `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}"`
+  let imgTag = `<img src="${escapeHtml(cleanSrc)}" alt="${escapeHtml(alt)}"`
   if (width) imgTag += ` width="${escapeHtml(width)}"`
   if (height) imgTag += ` height="${escapeHtml(height)}"`
   imgTag += " />"
 
   let html = `<figure class="figure-shortcode">`
-  if (link) {
-    html += `<a href="${escapeHtml(link)}">${imgTag}</a>`
+  if (cleanLink) {
+    html += `<a href="${escapeHtml(cleanLink)}">${imgTag}</a>`
   } else {
     html += imgTag
   }
