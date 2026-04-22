@@ -46,13 +46,16 @@ function buildYoutubeHtml(attrs: Record<string, string>): string {
 
   return `<div class="yv${embedClass}" data-video-id="${videoId}" data-playlist="${playlistParam}" data-autoplay="${autoplayVal}">
     <div class="yv-thumb" tabindex="0" role="button" aria-label="Play YouTube video">
+        <div class="yv-bg"></div>
         <img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" alt="${videoTitle}" loading="lazy">
-        ${title ? `<div class="yv-title">${videoTitle}</div>` : ""}
+        ${title ? `<div class="yv-title"><span class="yv-title-text">${videoTitle}</span></div>` : ""}
         <div class="yv-play">
-            <svg viewBox="0 0 24 24" width="24" height="24">
+            <div class="yv-play-ring"></div>
+            <svg viewBox="0 0 24 24">
                 <path fill="currentColor" d="M8 5v14l11-7z"/>
             </svg>
         </div>
+        <div class="yv-glow"></div>
     </div>
     <div class="yv-embed">
         <noscript>

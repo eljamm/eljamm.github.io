@@ -466,6 +466,19 @@ figure.img-shortcode {
   }
 }
 
+.yv {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
 .yv-thumb {
   position: absolute;
   top: 0;
@@ -475,12 +488,74 @@ figure.img-shortcode {
   cursor: pointer;
   background: #000;
   z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
   }
+
+  &:hover {
+    transform: scale(1.02);
+    
+    img {
+      transform: scale(1.05);
+      filter: brightness(0.85);
+    }
+
+    .yv-glow {
+      opacity: 1;
+    }
+
+    .yv-play {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: rgba(25, 25, 25, 0.9);
+      box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    
+    .yv-play {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.yv-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.yv-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .yv-play {
@@ -488,20 +563,50 @@ figure.img-shortcode {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 68px;
-  height: 48px;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
-  z-index: 2;
+  background: rgba(15, 15, 15, 0.85);
+  border-radius: 50%;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
 
   svg {
-    width: 24px;
-    height: 24px;
     fill: #fff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.25s ease;
+  }
+}
+
+.yv-play-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.yv-thumb:hover .yv-play-ring {
+  animation: pulse-ring 0.6s ease-out;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
   }
 }
 
@@ -510,29 +615,25 @@ figure.img-shortcode {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 0.5rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: #fff;
-  font-size: 0.9rem;
+  padding: 1.5rem 1rem 0.75rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.2) 70%,
+    transparent 100%
+  );
   z-index: 2;
 }
 
-.yv-thumb:hover .yv-play,
-.yv-thumb:focus .yv-play {
-  background: #f00;
-}
-
-.yv-thumb:focus {
-  outline: 2px solid #f00;
-  outline-offset: -2px;
-}
-
-.yv {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-  background: #000;
-  margin: 1.5rem 0;
+.yv-title-text {
+  display: block;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .yv-embed {
@@ -547,6 +648,7 @@ figure.img-shortcode {
     width: 100%;
     height: 100%;
     border: 0;
+    border-radius: 12px;
   }
 }
 
