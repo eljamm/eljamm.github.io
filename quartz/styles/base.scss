@@ -466,6 +466,90 @@ figure.img-shortcode {
   }
 }
 
+.yv-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #000;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.yv-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 2;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+  }
+}
+
+.yv-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: #fff;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.yv-thumb:hover .yv-play,
+.yv-thumb:focus .yv-play {
+  background: #f00;
+}
+
+.yv-thumb:focus {
+  outline: 2px solid #f00;
+  outline-offset: -2px;
+}
+
+.yv {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+  margin: 1.5rem 0;
+}
+
+.yv-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
 pre {
   font-family: var(--codeFont);
   padding: 0 0.5rem;
