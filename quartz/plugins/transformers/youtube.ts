@@ -34,6 +34,7 @@ function buildYoutubeHtml(attrs: Record<string, string>): string {
   const { id, title, playlist, autoplay, class: className, cookie } = attrs
 
   if (!id) {
+    console.warn("[youtube] Missing video id")
     return ""
   }
 

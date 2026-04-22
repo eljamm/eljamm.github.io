@@ -264,8 +264,8 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     `)
   }
 
-  componentResources.afterDOMLoaded.push(`document.addEventListener("DOMContentLoaded", () => {
-  document.body.addEventListener("click", handleVideoInteraction);
+  componentResources.afterDOMLoaded
+    .push(`document.body.addEventListener("click", handleVideoInteraction);
   document.body.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       handleVideoInteraction(e);
@@ -282,6 +282,8 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     const playlistId = container.dataset.playlist;
     const autoplayVal = container.dataset.autoplay;
     const embedContainer = container.querySelector(".yv-embed");
+
+    if (embedContainer.querySelector("iframe")) return;
 
     const iframe = document.createElement("iframe");
     iframe.setAttribute("class", "yvi");
@@ -303,13 +305,12 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
 
     iframe.src = \`https://www.youtube-nocookie.com/embed/\${videoId}?\${params.toString()}\`;
 
-    embedContainer.textContent = "";
-    embedContainer.appendChild(iframe);
+    embedContainer.replaceChildren(iframe);
 
     trigger.style.display = "none";
     iframe.focus();
   }
-});`)
+`)
 }
 
 // This emitter should not update the `resources` parameter. If it does, partial

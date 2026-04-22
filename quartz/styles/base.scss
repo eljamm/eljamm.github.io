@@ -13,6 +13,10 @@ html {
   @media all and ($mobile) {
     scroll-padding-top: 4rem;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -474,7 +478,7 @@ figure.img-shortcode {
   margin: 1.5rem 0;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
@@ -495,12 +499,14 @@ figure.img-shortcode {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+    transition:
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      filter 0.4s ease;
   }
 
   &:hover {
     transform: scale(1.02);
-    
+
     img {
       transform: scale(1.05);
       filter: brightness(0.85);
@@ -513,7 +519,7 @@ figure.img-shortcode {
     .yv-play {
       transform: translate(-50%, -50%) scale(1.08);
       background: rgba(25, 25, 25, 0.9);
-      box-shadow: 
+      box-shadow:
         0 6px 24px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
@@ -521,9 +527,22 @@ figure.img-shortcode {
 
   &:focus {
     outline: none;
-    
+
     .yv-play {
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    img,
+    .yv-play,
+    .yv-glow {
+      transition: none !important;
+    }
+
+    .yv-play-ring {
+      animation: none !important;
     }
   }
 }
@@ -570,7 +589,7 @@ figure.img-shortcode {
   justify-content: center;
   background: rgba(15, 15, 15, 0.85);
   border-radius: 50%;
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
