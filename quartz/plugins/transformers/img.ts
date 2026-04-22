@@ -8,7 +8,7 @@ const defaultOptions: Options = {
   enable: true,
 }
 
-const figureShortcodeRegex = /\{\{\s*figure\s*\(([\s\S]*?)\)\s*\}\}/g
+const imgShortcodeRegex = /\{\{\s*img\s*\(([\s\S]*?)\)\s*\}\}/g
 
 function parseShortcodeAttributes(content: string): Record<string, string> {
   const attrs: Record<string, string> = {}
@@ -49,7 +49,7 @@ function buildFigureHtml(attrs: Record<string, string>): string {
   if (height) imgTag += ` height="${escapeHtml(height)}"`
   imgTag += " />"
 
-  let html = `<figure class="figure-shortcode">`
+  let html = `<figure class="img-shortcode">`
   if (cleanLink) {
     html += `<a href="${escapeHtml(cleanLink)}">${imgTag}</a>`
   } else {
@@ -63,17 +63,17 @@ function buildFigureHtml(attrs: Record<string, string>): string {
   return html
 }
 
-export const Figure: QuartzTransformerPlugin<Partial<Options>> = (userOpts) => {
+export const Img: QuartzTransformerPlugin<Partial<Options>> = (userOpts) => {
   const opts = { ...defaultOptions, ...userOpts }
 
   return {
-    name: "Figure",
+    name: "Img",
     textTransform(_ctx, src) {
       if (!opts.enable) {
         return src
       }
 
-      return src.toString().replace(figureShortcodeRegex, (_value, content) => {
+      return src.toString().replace(imgShortcodeRegex, (_value, content) => {
         const attrs = parseShortcodeAttributes(content)
         return buildFigureHtml(attrs)
       })
