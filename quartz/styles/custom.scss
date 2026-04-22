@@ -1,3 +1,19 @@
 @use "./base.scss";
+@use "./variables" as *;
 
-// put your custom CSS here!
+// Explorer page title text wrapping
+.explorer-content ul li > a,
+.folder-container div > a,
+.folder-container div > button span {
+  display: inline-block;
+  padding-left: 1rem;
+  text-indent: -1rem;
+  white-space: normal;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1rem;
+    float: left;
+  }
+}
