@@ -131,18 +131,18 @@ export default ((userOpts?: Partial<Options>) => {
           <li>
             <div class="folder-container">
               <svg
+                class="folder-icon"
                 xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="5 8 14 8"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="folder-icon"
               >
-                <polyline points="6 9 12 15 18 9"></polyline>
+                <polyline points="3 5 7 9 11 5" />
               </svg>
               <div>
                 <button class="folder-button">
