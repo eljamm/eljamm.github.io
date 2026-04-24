@@ -71,6 +71,7 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
       Plugin.Img(),
+      Plugin.Video(),
       Plugin.YouTube(),
     ],
     filters: [Plugin.RemoveDrafts()],

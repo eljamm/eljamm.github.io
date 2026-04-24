@@ -470,6 +470,24 @@ figure.img-shortcode {
   }
 }
 
+figure.video-shortcode {
+  margin: 1.5rem 0;
+  text-align: center;
+
+  video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  figcaption {
+    color: var(--darkgray);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+}
+
 .yv {
   position: relative;
   width: 100%;
