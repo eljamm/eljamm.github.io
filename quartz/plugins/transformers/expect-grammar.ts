@@ -1,0 +1,153 @@
+const tclPatterns = [
+  {
+    begin: "(?<=^|;)\\s*((#))",
+    beginCaptures: { 1: { name: "comment.line.number-sign.tcl" }, 2: { name: "punctuation.definition.comment.tcl" } },
+    contentName: "comment.line.number-sign.tcl",
+    end: "\\n",
+    patterns: [{ match: "(\\\\\\\\|\\\\\\n)" }],
+  },
+  {
+    match: "(?<=^|[\\[{;])\\s*(if|while|for|catch|default|return|break|continue|switch|exit|foreach|try|throw)\\b",
+    captures: { 1: { name: "keyword.control.tcl" } },
+  },
+  {
+    match: "(?<=^|})\\s*(then|elseif|else)\\b",
+    captures: { 1: { name: "keyword.control.tcl" } },
+  },
+  {
+    match: "(?<=^|{)\\s*(proc)\\s+([^\\s]+)",
+    captures: { 1: { name: "keyword.other.tcl" }, 2: { name: "entity.name.function.tcl" } },
+  },
+  {
+    match: "(?<=^|[\\[{;])\\s*(after|append|array|auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|binary|cd|clock|close|concat|dde|encoding|eof|error|eval|exec|expr|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|format|gets|glob|global|history|http|incr|info|interp|join|lappend|library|lindex|linsert|list|llength|load|lrange|lreplace|lsearch|lset|lsort|memory|msgcat|namespace|open|package|parray|pid|pkg::create|pkg_mkIndex|proc|puts|pwd|re_syntax|read|registry|rename|resource|scan|seek|set|socket|SafeBase|source|split|string|subst|Tcl|tcl_endOfWord|tcl_findLibrary|tcl_startOfNextWord|tcl_startOfPreviousWord|tcl_wordBreakAfter|tcl_wordBreakBefore|tcltest|tclvars|tell|time|trace|unknown|unset|update|uplevel|upvar|variable|vwait)\\b",
+    captures: { 1: { name: "keyword.other.tcl" } },
+  },
+  {
+    begin: "(?<=^|[\\[{;])\\s*(regexp|regsub)\\b\\s*",
+    beginCaptures: { 1: { name: "keyword.other.tcl" } },
+    comment: "special-case regexp/regsub keyword in order to handle the expression",
+    end: "[\\n;\\]]",
+    patterns: [
+      { match: "\\\\(?:.|\\n)", name: "constant.character.escape.tcl" },
+      { match: "-\\w+\\s*" },
+      { applyEndPatternLast: 1, begin: "--\\s*", comment: "end of switches", end: "", patterns: [{ include: "#regexp" }] },
+      { include: "#regexp" },
+    ],
+  },
+  { include: "#escape" },
+  { include: "#variable" },
+  { include: "#operator" },
+  { include: "#numeric" },
+  {
+    begin: '"',
+    beginCaptures: { 0: { name: "punctuation.definition.string.begin.tcl" } },
+    end: '"',
+    endCaptures: { 0: { name: "punctuation.definition.string.end.tcl" } },
+    name: "string.quoted.double.tcl",
+    patterns: [{ include: "#escape" }, { include: "#variable" }, { include: "#embedded" }],
+  },
+]
+
+const tclRepository = {
+  "bare-string": {
+    begin: '(?:^|(?<=\\s))"',
+    comment: "matches a single quote-enclosed word without scoping",
+    end: '"([^\\s\\]]*)',
+    endCaptures: { 1: { name: "invalid.illegal.tcl" } },
+    patterns: [{ include: "#escape" }, { include: "#variable" }],
+  },
+  braces: {
+    begin: "(?:^|(?<=\\s))\\{",
+    comment: "matches a single brace-enclosed word",
+    end: "\\}([^\\s\\]]*)",
+    endCaptures: { 1: { name: "invalid.illegal.tcl" } },
+    patterns: [{ match: "\\\\[{}\\n]", name: "constant.character.escape.tcl" }, { include: "#inner-braces" }],
+  },
+  embedded: {
+    begin: "\\[",
+    beginCaptures: { 0: { name: "punctuation.section.embedded.begin.tcl" } },
+    end: "\\]",
+    endCaptures: { 0: { name: "punctuation.section.embedded.end.tcl" } },
+    name: "source.tcl.embedded",
+    patterns: [{ include: "source.tcl" }],
+  },
+  escape: {
+    match: "\\\\(\\d{1,3}|x[a-fA-F0-9]+|u[a-fA-F0-9]{1,4}|.|\\n)",
+    name: "constant.character.escape.tcl",
+  },
+  "inner-braces": {
+    begin: "\\{",
+    comment: "matches a nested brace in a brace-enclosed word",
+    end: "\\}",
+    patterns: [{ match: "\\\\[{}\\n]", name: "constant.character.escape.tcl" }, { include: "#inner-braces" }],
+  },
+  numeric: {
+    match: "(?<![a-zA-Z])([+-]?([0-9]*[.])?[0-9]+f?)(?![\\.a-zA-Z])",
+    name: "constant.numeric.tcl",
+  },
+  operator: {
+    match: "(?<= |\\d)(-|\\+|~|&{1,2}|\\|{1,2}|<{1,2}|>{1,2}|\\*{1,2}|!|%|\\/|<=|>=|={1,2}|!=|\\^)(?= |\\d)",
+    name: "keyword.operator.tcl",
+  },
+  regexp: {
+    begin: "(?=\\S)(?![\\n;\\]])",
+    comment: "matches a single word, named as a regexp, then swallows the rest of the command",
+    end: "(?=[\\n;\\]])",
+    patterns: [
+      {
+        begin: "(?=[^ \\t\\n;])",
+        end: "(?=[ \\t\\n;])",
+        name: "string.regexp.tcl",
+        patterns: [{ include: "#braces" }, { include: "#bare-string" }, { include: "#escape" }, { include: "#variable" }],
+      },
+      {
+        begin: "[ \\t]",
+        comment: "swallow the rest of the command",
+        end: "(?=[\\n;\\]])",
+        patterns: [{ include: "#variable" }, { include: "#embedded" }, { include: "#escape" }, { include: "#braces" }, { include: "#string" }],
+      },
+    ],
+  },
+  string: {
+    applyEndPatternLast: 1,
+    begin: '(?:^|(?<=\\s))(?=")',
+    comment: "matches a single quote-enclosed word with scoping",
+    end: "",
+    name: "string.quoted.double.tcl",
+    patterns: [{ include: "#bare-string" }],
+  },
+  variable: {
+    match: "(\\$)((?:[a-zA-Z0-9_]|::)+(\\([^\\)]+\\))?|\\{[^\\}]*\\})",
+    captures: { 1: { name: "punctuation.definition.variable.tcl" } },
+    name: "support.function.tcl",
+  },
+}
+
+const expectCommands = {
+  match:
+    "(?<=^|[\\[{;])\\s*(spawn|expect|send|exp_continue|exp_log_user|expect_after|expect_before|expect_background|expect_buffer|expect_checkfd|expect_event|expect_in|expect_out|expect_tty|expect_user|expect_vanish|interact|interact_exit|interact_monitor|interact_spawn|log_file|log_user|match_max|match_pattern|remove_in|send_error|send_log|send_tty|send_user|stty|system)\\b",
+  captures: { 1: { name: "keyword.control.expect" } },
+}
+
+const expectTimeout = {
+  match: "(?<=^|[\\[{;])\\s*(timeout)\\b",
+  captures: { 1: { name: "variable.language.expect" } },
+}
+
+const expectBuiltin = {
+  match:
+    "(?<=^|[\\[{;])\\s*(disconnect|harp|overlap|parray|prompt|pwd|remove_nulls|strace|trace|wait)\\b",
+  captures: { 1: { name: "keyword.other.expect" } },
+}
+
+export const expectGrammar = {
+  name: "expect",
+  scopeName: "source.expect",
+  displayName: "Expect",
+  fileTypes: ["exp"],
+  aliases: ["exp"],
+  foldingStartMarker: "\\{\\s*$",
+  foldingStopMarker: "^\\s*\\}",
+  patterns: [expectCommands, expectTimeout, expectBuiltin, ...tclPatterns],
+  repository: tclRepository,
+}
