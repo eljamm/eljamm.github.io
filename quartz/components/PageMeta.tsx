@@ -69,7 +69,7 @@ const PageMeta: QuartzComponent = ({ fileData, displayClass }: QuartzComponentPr
 
   if (hasRating) {
     const stars: JSX.Element[] = []
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 7; i++) {
       stars.push(<span class={i <= ratingValue ? "star filled" : "star"}>★</span>)
     }
     items.push(
