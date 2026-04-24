@@ -13,7 +13,7 @@ tags:
   - tool
   - nix
 created: 2026-04-24T18:37
-modified: 2026-04-24T18:43
+modified: 2026-04-24T23:34
 ---
 
 ## What it does
@@ -29,8 +29,8 @@ Provide a nice interface for cleaning up old Nix profile generations and left-ov
   link=""
 ) }}
 
-## Similar Tools
+## Related Software
 
 - [[nix-du|symphorien/nix-du: Visualise which gc-roots to delete to free some space in your nix store]]
 
-## Related
+## Further Reading
