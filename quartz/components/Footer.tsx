@@ -15,20 +15,21 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          © {year} user • {t.license ?? "Website content is licensed under"}{" "}
+          {Object.entries(links).map(([text, link], i) => (
+            <>
+              <a href={link}>{text}</a>
+              {i < Object.entries(links).length - 1 && <span> • </span>}
+            </>
+          ))}
+        </p>
+        <p>
+          © {year} Fedi Jamoussi • {t.license ?? "Website content is licensed under"}{" "}
           <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
         </p>
         <p>
           {t.poweredBy ?? "Powered by"}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a>
         </p>
-        <ul>
-          {Object.entries(links).map(([text, link]) => (
-            <li>
-              <a href={link}>{text}</a>
-            </li>
-          ))}
-        </ul>
       </footer>
     )
   }
