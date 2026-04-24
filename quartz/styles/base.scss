@@ -287,10 +287,12 @@ a {
 
     & .center > article {
       grid-area: grid-center;
+      margin-bottom: 5rem;
     }
 
     & footer {
       grid-area: grid-footer;
+      margin-top: -3rem;
     }
 
     & .center,
