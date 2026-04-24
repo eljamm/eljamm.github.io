@@ -38,8 +38,10 @@ export interface Translation {
     explorer: {
       title: string
     }
-    footer: {
+footer: {
       createdWith: string
+      license?: string
+      poweredBy?: string
     }
     graph: {
       title: string

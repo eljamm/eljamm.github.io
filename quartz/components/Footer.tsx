@@ -11,11 +11,16 @@ export default ((opts?: Options) => {
   const Footer: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
     const year = new Date().getFullYear()
     const links = opts?.links ?? []
+    const t = i18n(cfg.locale).components.footer
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          {i18n(cfg.locale).components.footer.createdWith}{" "}
-          <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
+          © {year} user • {t.license ?? "Website content is licensed under"}{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+        </p>
+        <p>
+          {t.poweredBy ?? "Powered by"}{" "}
+          <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a>
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
