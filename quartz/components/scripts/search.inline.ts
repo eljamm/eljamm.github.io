@@ -235,7 +235,7 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
 
   function showSearch(searchTypeNew: SearchType) {
     searchType = searchTypeNew
-    if (sidebar) sidebar.style.zIndex = "1"
+    if (sidebar) sidebar.style.zIndex = "1000"
     container.classList.add("active")
     searchBar.focus()
   }
