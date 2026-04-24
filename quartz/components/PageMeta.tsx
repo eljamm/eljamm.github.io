@@ -26,7 +26,7 @@ const PageMeta: QuartzComponent = ({ fileData, displayClass }: QuartzComponentPr
       const match = cat.match(/\[\[([^\]]+)\]\]/)
       const label = match ? match[1] : cat
       return (
-        <a href={`/${label.toLowerCase().replace(/\s+/g, "-")}`} class="internal category-link">
+        <a href={`/categories/${label.toLowerCase().replace(/\s+/g, "-")}`} class="internal category-link">
           {label}
         </a>
       )
