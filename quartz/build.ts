@@ -143,34 +143,48 @@ async function startWatching(
   }
 
   const watcher = chokidar.watch(".", {
-    awaitWriteFinish: { stabilityThreshold: 250 },
+    awaitWriteFinish: { stabilityThreshold: 50 },
     persistent: true,
     cwd: argv.directory,
     ignoreInitial: true,
   })
 
   const changes: ChangeEvent[] = []
+  let debounceTimer: NodeJS.Timeout | undefined
+  const DEBOUNCE_MS = 100
+
+  function triggerRebuild() {
+    if (debounceTimer) clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => {
+      if (changes.length > 0) {
+        void rebuild([...changes], clientRefresh, buildData)
+        changes.length = 0
+      }
+    }, DEBOUNCE_MS)
+  }
+
   watcher
     .on("add", (fp) => {
       fp = toPosixPath(fp)
       if (buildData.ignored(fp)) return
       changes.push({ path: fp as FilePath, type: "add" })
-      void rebuild(changes, clientRefresh, buildData)
+      triggerRebuild()
     })
     .on("change", (fp) => {
       fp = toPosixPath(fp)
       if (buildData.ignored(fp)) return
       changes.push({ path: fp as FilePath, type: "change" })
-      void rebuild(changes, clientRefresh, buildData)
+      triggerRebuild()
     })
     .on("unlink", (fp) => {
       fp = toPosixPath(fp)
       if (buildData.ignored(fp)) return
       changes.push({ path: fp as FilePath, type: "delete" })
-      void rebuild(changes, clientRefresh, buildData)
+      triggerRebuild()
     })
 
   return async () => {
+    if (debounceTimer) clearTimeout(debounceTimer)
     await watcher.close()
   }
 }
