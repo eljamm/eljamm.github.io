@@ -147,6 +147,7 @@ async function startWatching(
     persistent: true,
     cwd: argv.directory,
     ignoreInitial: true,
+    ignored: buildData.ignored,
   })
 
   const changes: ChangeEvent[] = []
