@@ -1,6 +1,6 @@
 ---
 title: Visualize Nix flamegraphs with NeoVim
-draft: false
+draft: true
 tags:
   - neovim
   - nix
@@ -10,7 +10,7 @@ modified: 2026-04-22T23:59
 
 # Introduction
 
-One of the cool feature that's been introduced to the [[Nix]] evaluator in version [2.30.0](https://github.com/NixOS/nix/releases/tag/2.30.0) is the [stack-sampling profiler](https://github.com/NixOS/nix/pull/13220), which can help [identify and optimize](https://github.com/NixOS/nixpkgs/pull/410782) evaluation bottlenecks by analyzing the [[flamegraphs]] it generates.
+One of the cool feature that's been introduced to the [[Nix]] evaluator in version [2.30.0](https://github.com/NixOS/nix/releases/tag/2.30.0) is the [stack-sampling profiler](https://github.com/NixOS/nix/pull/13220), which can help [identify and optimize](https://github.com/NixOS/nixpkgs/pull/410782) evaluation bottlenecks by analyzing the [[flamegraph|flamegraphs]] it generates.
 
 In this post, we'll go through the necessary steps to visualize this flamegraph inside [[NeoVim]], for a more seamless development experience.
 
@@ -21,21 +21,23 @@ In this post, we'll go through the necessary steps to visualize this flamegraph 
   link="<https://github.com/ngi-nix/ngipkgs/blob/4810584e62513da39b5cdee18ffb4aef4865a982/overview/default.nix#L238>"
 ) }}
 
-# Nix profiler
+# Nix Flamegraphs
+
+## Prerequisites
 
 Before we start, make sure that your Nix version is higher than `2.30.0`.
-At the time of writing, the latest one is [2.33.5](https://github.com/NixOS/nix/releases/tag/2.33.5), which is tested to work with the examples we'll be seeing.
+At the time of writing, the latest one available is [2.33.5](https://github.com/NixOS/nix/releases/tag/2.33.5), which is tested to work with the examples we'll be seeing.
 
-If you want to specifically use that, replace all `nix ...` commands with:
+If you want to specifically use that, replace all subsequent `nix ...` commands with:
 
 ```fish
 nix run github:NixOS/nix/v2.33.5 -- ...
 ```
 
-## Generating a flamegraph
+## Profile Nix code
 
-We can anaylze anything that the evaulator can process (derivations, NixOS systems, ...), but for the purpose of this post let's create a minimal example.
-Save the following snippet to file on your system:
+We can anaylze anything that the evaulator can process (derivations, NixOS systems, ...), but for the purpose of this post we're going to use a minimal example.
+First, save the following snippet to file on your system:
 
 ```nix title="default.nix"
 {
@@ -70,23 +72,39 @@ nix eval \
 
 This will evaluate the `test` attribute and generate a flamegraph under `nix.profile`.
 
-## Visualization tools
+## Visualize flamegraph data
 
-There exist many tools that can visualize flamegraph files, but the most I like are:
+There are many tools that allow you to visualize flamegraph files.
+My favorites are currently:
 
 1. [speedscope](https://github.com/jlfwong/speedscope)
 1. [flamelens](https://github.com/YS-L/flamelens)
 1. [flamegraph](https://github.com/brendangregg/FlameGraph)
 
-Which are all available in Nixpkgs :)
+Since these are all available in [[Nixpkgs]], you can try them out with:
 
-Reading these graphs is simple.
+```fish
+nix run nixpkgs#speedscope -- nix.profile
+nix run nixpkgs#flamelens -- nix.profile
+nix run nixpkgs#flamegraph -- nix.profile > flamegraph.svg
+```
+
+The result should look something like:
 
 {{ img(
   src="/static/images/flamelens.svg"
   alt="flamelens output"
   caption="flamelens nix.profile"
 ) }}
+
+## Analyze flamegraph
+
+There may be [[flamegraph#Resources|resources]] that explain this better, but in a nutshell:
+
+- each function is represented as a block
+- the wider a block is, the more time it took for that function to do its job
+- each block breaks down into sub-blocks: functions that the original function calls
+- we read a flamegraph from decreasing width
 
 # NeoVim plugin
 
@@ -127,7 +145,7 @@ return {
 The plugin expects the file to be under `perf.log`, by default, but will ask you for the file path if it can't find it.
 
 ```fish
-nix run github:NixOS/nix/v2.33.5 -- eval \
+nix eval \
     --no-eval-cache \
     --file ./default.nix overview \
     --option eval-profiler flamegraph \
