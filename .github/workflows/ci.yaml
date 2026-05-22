@@ -3,10 +3,10 @@ name: Build and Test
 on:
   pull_request:
     branches:
-      - v4
+      - quartz
   push:
     branches:
-      - v4
+      - quartz
   workflow_dispatch:
 
 permissions: {}
@@ -51,7 +51,7 @@ jobs:
         run: npx quartz build --bundleInfo -d docs
 
   publish-tag:
-    if: ${{ github.repository == 'jackyzha0/quartz' && github.ref == 'refs/heads/v4' }}
+    if: ${{ github.repository == 'jackyzha0/quartz' && github.ref == 'refs/heads/quartz' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
