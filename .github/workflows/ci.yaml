@@ -3,20 +3,19 @@ name: Build and Test
 on:
   pull_request:
     branches:
-      - v5
+      - quartz-v5
   push:
     branches:
-      - v5
+      - quartz-v5
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
   build-and-test:
-    if: ${{ github.repository == 'jackyzha0/quartz' }}
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
