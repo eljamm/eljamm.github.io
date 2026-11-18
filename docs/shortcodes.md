@@ -19,14 +19,14 @@ Embed images with optional caption, sizing, and link wrapping.
 
 ### Attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `src` | Image URL (required) |
-| `alt` | Alt text for accessibility |
+| Attribute | Description                        |
+| --------- | ---------------------------------- |
+| `src`     | Image URL (required)               |
+| `alt`     | Alt text for accessibility         |
 | `caption` | Caption text displayed below image |
-| `width` | CSS width (e.g., "100%", "500px") |
-| `height` | CSS height |
-| `link` | URL to wrap image in a link |
+| `width`   | CSS width (e.g., "100%", "500px")  |
+| `height`  | CSS height                         |
+| `link`    | URL to wrap image in a link        |
 
 ### Examples
 
@@ -64,17 +64,17 @@ Embed videos with optional caption and playback controls.
 
 ### Attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `src` | Video URL (required) |
-| `width` | CSS width (e.g., "100%") |
-| `height` | CSS height |
-| `controls` | Show playback controls ("true" / "false") |
-| `autoplay` | Autoplay on page load |
-| `loop` | Loop video |
-| `muted` | Mute audio (required for autoplay in most browsers) |
-| `caption` | Caption text |
-| `alt` | Caption track label for accessibility |
+| Attribute  | Description                                         |
+| ---------- | --------------------------------------------------- |
+| `src`      | Video URL (required)                                |
+| `width`    | CSS width (e.g., "100%")                            |
+| `height`   | CSS height                                          |
+| `controls` | Show playback controls ("true" / "false")           |
+| `autoplay` | Autoplay on page load                               |
+| `loop`     | Loop video                                          |
+| `muted`    | Mute audio (required for autoplay in most browsers) |
+| `caption`  | Caption text                                        |
+| `alt`      | Caption track label for accessibility               |
 
 ### Examples
 

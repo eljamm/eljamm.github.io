@@ -2,5 +2,5 @@
 categories:
   - "[[People]]"
 org: []
-created: {{date}}
+created: { { date } }
 ---

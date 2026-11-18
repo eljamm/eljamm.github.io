@@ -1,5 +1,5 @@
 ---
-created: {{date}}
+created: { { date } }
 tags:
   - note
   - journal
