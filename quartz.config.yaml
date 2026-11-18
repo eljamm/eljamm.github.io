@@ -1,13 +1,12 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Quartz 5
+  pageTitle: Fedi{eljamm};
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
-  analytics:
-    provider: plausible
+  analytics: null
   locale: en-US
-  baseUrl: quartz.jzhao.xyz
+  baseUrl: eljamm.github.io
   ignorePatterns:
     - private
     - templates
@@ -203,8 +202,11 @@ plugins:
     enabled: true
     options:
       links:
-        GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
+        GitHub: "https://github.com/eljamm"
+        Discourse: "https://discourse.nixos.org/u/eljamm/summary"
+        Mastodon: https://mastodon.social/@eljamm
+        "E-mail": "mailto:fedi.jamoussi@protonmail.ch"
+      message: 'Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br><p>Fedi Jamoussi</p>'
     layout:
       position: footer
       priority: 50
