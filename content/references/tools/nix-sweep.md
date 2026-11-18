@@ -31,6 +31,6 @@ Provide a nice interface for cleaning up old Nix profile generations and left-ov
 
 ## Related Software
 
-- [[nix-du|symphorien/nix-du: Visualise which gc-roots to delete to free some space in your nix store]]
+- [[nix-du]]
 
 ## Further Reading
