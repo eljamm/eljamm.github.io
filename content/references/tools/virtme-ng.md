@@ -5,7 +5,7 @@ type:
 use-case:
 website:
 source: "[arighi/virtme-ng](https://github.com/arighi/virtme-ng)"
-documentation:
+docs:
 language:
 license:
 rating:

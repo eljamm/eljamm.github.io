@@ -4,7 +4,7 @@ type:
 use-case:
 website: https://nixos.org
 source: "[NixOS/nix](https://github.com/NixOS/nix)"
-documentation: https://nix.dev/reference/nix-manual
+docs: https://nix.dev/reference/nix-manual
 language:
 license:
 rating: 7

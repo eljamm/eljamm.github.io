@@ -4,7 +4,7 @@ type:
 use-case:
 website:
 source:
-documentation:
+docs:
 language:
 license:
 rating:

@@ -5,7 +5,7 @@ type:
 use-case:
 website:
 source: "[symphorien/nix-du](https://github.com/symphorien/nix-du)"
-documentation:
+docs:
 language: "[[Rust]]"
 license:
 rating:

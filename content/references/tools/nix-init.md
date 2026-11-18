@@ -5,7 +5,7 @@ type:
 use-case:
 website:
 source: "[nix-community/nix-init](https://github.com/nix-community/nix-init)"
-documentation:
+docs:
 language:
 license:
 rating:

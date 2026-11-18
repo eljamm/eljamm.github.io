@@ -5,7 +5,7 @@ type:
 use-case:
 website:
 source: "[ngi-nix/debnix](https://github.com/ngi-nix/debnix)"
-documentation:
+docs:
 language: "[[Rust]]"
 license:
 rating:

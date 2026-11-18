@@ -5,7 +5,7 @@ type:
 use-case:
 website:
 source: "[jzbor/nix-sweep](https://github.com/jzbor/nix-sweep)"
-documentation:
+docs:
 language: "[[Rust]]"
 license:
 rating:
