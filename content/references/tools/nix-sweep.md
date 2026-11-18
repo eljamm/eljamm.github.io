@@ -23,7 +23,7 @@ Provide a nice interface for cleaning up old Nix profile generations and left-ov
 ## Usage
 
 {{ img(
-  src="<https://camo.githubusercontent.com/07adb2393cdc5993dc451fb7d1e453bc2123eef4c153142550f2330754e86b2e/68747470733a2f2f66696c65732e6a7a626f722e64652f6769746875622f6e69782d73776565702d64656d6f2e676966>"
+  src="<https://camo.githubusercontent.com/fdea0954c92834741f04dfafeab5e4cfec919e6247b1a448a81e7ea3aa541748/68747470733a2f2f66696c65732e6a7a626f722e64652f6769746875622f6e69782d73776565702d64656d6f2e676966>"
   alt="nix-sweep demo"
   caption=""
   link=""
