@@ -1,6 +1,6 @@
 import matter from "gray-matter"
 import remarkFrontmatter from "remark-frontmatter"
-import yaml from "js-yaml"
+import * as yaml from "js-yaml"
 import toml from "toml"
 import { QuartzTransformerPlugin } from "../types"
 import { QuartzPluginData } from "../vfile"
