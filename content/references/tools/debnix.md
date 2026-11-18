@@ -4,7 +4,7 @@ type:
   - "[[CLI]]"
 use-case:
 website:
-source: https://github.com/ngi-nix/debnix
+source: "[ngi-nix/debnix](https://github.com/ngi-nix/debnix)"
 documentation:
 language: "[[Rust]]"
 license:
@@ -16,7 +16,7 @@ created: 2026-04-24T18:44
 modified: 2026-04-24T23:33
 ---
 
-## What it does
+## Description
 
 Translate debian library names to their corresponding names in Nixpkgs.
 

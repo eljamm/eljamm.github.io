@@ -4,7 +4,7 @@ type:
   - "[[CLI]]"
 use-case:
 website:
-source: https://github.com/nix-community/nix-init
+source: "[nix-community/nix-init](https://github.com/nix-community/nix-init)"
 documentation:
 language:
 license:
@@ -14,7 +14,7 @@ tags:
   - nix
 ---
 
-## What it does
+## Description
 
 Generate Nix packages from URLs with hash pre-fetching, dependency inference, license detection, and more.
 

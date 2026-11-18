@@ -12,7 +12,7 @@ tags:
   - tool
 ---
 
-## What it does
+## Description
 
 ## Usage
 

@@ -3,7 +3,7 @@ categories: "[[Software]]"
 type:
 use-case:
 website: https://nixos.org
-source: https://github.com/NixOS/nix
+source: "[NixOS/nix](https://github.com/NixOS/nix)"
 documentation: https://nix.dev/reference/nix-manual
 language:
 license:
@@ -12,7 +12,7 @@ tags:
   - tool
 ---
 
-## What it does
+## Description
 
 [[Declarative]], [[functional]], [[lazy evaluation|lazily-evaluated]], pacakge manager.
 

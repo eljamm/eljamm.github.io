@@ -4,7 +4,7 @@ type:
   - "[[CLI]]"
 use-case:
 website:
-source: https://github.com/jzbor/nix-sweep
+source: "[jzbor/nix-sweep](https://github.com/jzbor/nix-sweep)"
 documentation:
 language: "[[Rust]]"
 license:
@@ -16,7 +16,7 @@ created: 2026-04-24T18:37
 modified: 2026-04-24T23:34
 ---
 
-## What it does
+## Description
 
 Provide a nice interface for cleaning up old Nix profile generations and left-over garbage collection roots.
 

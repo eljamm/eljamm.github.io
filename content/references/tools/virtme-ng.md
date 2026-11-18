@@ -4,7 +4,7 @@ type:
   - "[[CLI]]"
 use-case:
 website:
-source: https://github.com/arighi/virtme-ng
+source: "[arighi/virtme-ng](https://github.com/arighi/virtme-ng)"
 documentation:
 language:
 license:
@@ -15,7 +15,7 @@ created: 2026-04-24T19:37
 modified: 2026-04-24T23:34
 ---
 
-## What it does
+## Description
 
 Tool that makes it easy to recompile and test linux kernels.
 

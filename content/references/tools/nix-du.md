@@ -4,7 +4,7 @@ type:
   - "[[CLI]]"
 use-case:
 website:
-source: https://github.com/symphorien/nix-du
+source: "[symphorien/nix-du](https://github.com/symphorien/nix-du)"
 documentation:
 language: "[[Rust]]"
 license:
@@ -16,7 +16,7 @@ created: 2026-04-24T18:40
 modified: 2026-04-24T23:33
 ---
 
-## What it does
+## Description
 
 Visualise which gc-roots to delete to free some space in your nix store.
 
