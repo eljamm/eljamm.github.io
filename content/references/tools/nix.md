@@ -2,9 +2,9 @@
 categories: "[[Software]]"
 type:
 use-case:
-website: https://nixos.org
-source: "[NixOS/nix](https://github.com/NixOS/nix)"
-docs: https://nix.dev/reference/nix-manual
+website: "[nixos.org](https://nixos.org)"
+source: "[nixos/nix](https://github.com/NixOS/nix)"
+docs: "[nix-manual](https://nix.dev/reference/nix-manual)"
 language:
 license:
 rating: 7

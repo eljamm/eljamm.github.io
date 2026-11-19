@@ -224,7 +224,7 @@ plugins:
       includeAll: false
       includedProperties:
         - description
-        - categories
+        #- categories
         - tags
         - aliases
         - website
@@ -232,7 +232,7 @@ plugins:
         - docs
         - rating
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
     order: 5
     layout:
       position: right
