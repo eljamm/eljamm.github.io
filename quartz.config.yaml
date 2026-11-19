@@ -157,7 +157,7 @@ plugins:
       position: beforeBody
       priority: 20
   - source: "@quartz-community/tag-list"
-    enabled: false
+    enabled: true
     layout:
       position: beforeBody
       priority: 30
@@ -205,7 +205,12 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: false
+    enabled: true
+    options:
+      showTags: true
+    layout:
+      position: left
+      priority: 40
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
