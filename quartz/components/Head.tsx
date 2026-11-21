@@ -104,6 +104,10 @@ export default (() => {
             return resource
           }
         })}
+
+        <link href="https://github.com/eljamm" rel="me" />
+        <link href="https://mastodon.social/@eljamm" rel="me" />
+        <link href="https://mathstodon.xyz/@eljamm" rel="me" />
       </head>
     )
   }
