@@ -22,3 +22,5 @@ Thin wrapper around [[terms/dynamic derivation|dynamic derivations]] to make it 
 ## Related Software
 
 ## Further Reading
+
+- [Drowse: Dynamic derivations made easy - Announcements - NixOS Discourse](https://discourse.nixos.org/t/drowse-dynamic-derivations-made-easy/75540)
